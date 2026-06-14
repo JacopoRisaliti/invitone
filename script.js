@@ -62,10 +62,10 @@ function endTouch() {
         if (!isTouching && deveEmergere) {
           isFadingLeaves = true;
         }
-      }, 1000);
+      }, 5000);
 
     }
-  }, 1000);
+  }, 5000);
 }
 
 // Eventi Mouse (Computer)

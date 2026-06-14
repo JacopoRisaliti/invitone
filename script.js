@@ -38,17 +38,39 @@ window.addEventListener("touchmove", (e) => {
 
 // 🍃 prato iniziale
 const leaves = [];
-const N = 10000;
+const N = 10000; // Ricorda di abbassare questo numero (es. 3000) se il telefono va a scatti!
 
 for (let i = 0; i < N; i++) {
   let x = Math.random() * w;
   let y = Math.random() * h;
 
-  const colors = [
-  "rgba(56, 238, 132, 0.7)",
-  "rgba(255, 255, 255, 0.7)",
-  "rgba(15, 53, 32, 0.7)"
-];
+  // 1. Scegliamo prima il simbolo in modo casuale
+  const symbols = ["🍃", "·", "*"];
+  const scelto = symbols[Math.floor(Math.random() * symbols.length)];
+  
+  // 2. Inizializziamo la variabile del colore
+  let coloreScelto = "";
+
+  // 3. Associazioni fisse: SE è un simbolo, ALLORA usa quel colore specifico
+  if (scelto === "🍃") {
+    coloreScelto = "rgba(58, 160, 92, 0.84)";  // Verde smeraldo per le foglie
+  } else if (scelto === "*") {
+    coloreScelto = "rgb(255, 228, 76)";    // Giallo/Oro per le stelle
+  } else if (scelto === "·") {
+    coloreScelto = "rgb(255, 255, 255)";  // Bianco semi-trasparente per i punti
+  }
+
+  leaves.push({
+    x,
+    y,
+    vx: 0,
+    vy: 0,
+    baseX: x,
+    baseY: y,
+    symbol: scelto,       // Salva il simbolo assegnato
+    color: coloreScelto   // Salva il colore abbinato a quel simbolo
+  });
+}
 
 const symbols = ["🍃", "·", "*"];
 

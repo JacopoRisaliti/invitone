@@ -1,7 +1,7 @@
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
-const pixelScaleFactor = 2;
+const pixelScaleFactor = 1;
 const spriteSize = 1;
 
 let w, h;
@@ -45,7 +45,7 @@ for (let i = 0; i < N; i++) {
   let y = Math.random() * h;
 
   const colors = [
-  "rgba(124,255,178,0.7)",
+  "rgba(56, 238, 132, 0.7)",
   "rgba(255, 255, 255, 0.7)",
   "rgba(15, 53, 32, 0.7)"
 ];

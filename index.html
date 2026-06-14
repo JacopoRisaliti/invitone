@@ -2,113 +2,143 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Se questo è un compleanno</title>
+    <title></title>
+    
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="maze.css">
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=WindSong&display=swap" rel="stylesheet">
+    
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.js"></script>
+    <script src="maze.js"></script>
 </head>
 <body>
 
     <canvas id="canvas"></canvas>
 
-    <div class="content-wrapper">
-        <main class="invitation-text">
+    <div class="main">
+        <div class="datone">            
+            <h1 class="data">15</h1>            
+            <h1 class="data">06</h1>        </div>        
+        
+        <div class="cover">            
+            <h1 class="title">                
+                <span class="celebrate">                    
+                ꧁꧂  
+                <br>
+                <br>
+                <br>
+                <br>
+                </span>                
+                <br>                
+                PRATO BASE 
+                <br>                
+                <br>            
+            </h1>            
+        </div>            
+        
+        <p class="descrizione">                
+            Se questo è un compleanno, guardatevi attorno amicə mortali, per un giorno non sarò una creatura elusiva.
+            <br><br>                
+            Nessuna migrazione stagionale.
+            <br>
+            Nessun inseguimento.
+            <br>
+            Nessuna coordinata trasmessa da satelliti militari.
+            <br><br>
+            Mi troverete dove l'erba insiste, gli alberi fanno il loro mestiere, ed io sto bene. 
+            <br><br>
+            Il 15 giugno sarò al parco di Villa Spada e rimarrò lì, nel verde, dall'ora in cui la luce si distende sull'erba fino a quando arriveranno le stelle.
+            <br>
+            Fenomeno stazionario a bassa dispersione.
+            <br><br>
+            Non ci sono prenotazioni. Non ci sono programmi. Non c'è un orario di arrivo.
+            <br>
+            <strong>C'è soltanto un punto di aggregazione.</strong>
+            <br><br>
+            Se vi andrà di passare, mi farà piacere, sapete dove trovarmi.
+        </p>            
+        
+        <h3>Ipotesi del luogo:</h3>            
+        <ul>                
+            <li>Erba d'alberi</li>                
+            <li>Persone care</li>                
+            <li>Mucosa sonora</li>            
+            <li>Pendenza gravitazionale</li>            
+            <li>Bus che agevolano</li>            
+        </ul>            
+        
+        <h3>Presupposti:</h3>            
+        <ul>                
+            <li>Voglia di stare al sole</li>                
+            <li>Anche poco</li>                
+            <li>Anche tanto</li>                
+            <li>Anche per caso</li>                                
+            <li>Sbrilluccichi</li>            
+        </ul>            
+        
+        <h3>Cosa portare (per condividere):</h3>            
+        <ul>                
+            <li>Bevande liquide per idratarsi</li>                
+            <li>Teli</li>                
+            <li>Libri, carte, giochi</li>                
+            <li>Primizie di stagione</li>                
+            <li>Ricette segrete</li>                
+            <li>Merendine innovative</li>                
+            <li>Qualunque cosa vi faccia stare bene</li>            
+        </ul>            
+        
+        <h3>Cosa non portare (per buon senso):</h3>            
+        <ul>                
+            <li>Plastiche monouso</li>                
+            <li>L'obbligo di restare</li>                
+            <li>L'obbligo di arrivare a un'ora precisa</li>                
+            <li>L'idea che si debba fare qualcosa di speciale</li>                
+            <li>Petardi</li>            
+        </ul>            
+        
+        <h3>Cosa ri*portare (a casa):</h3>            
+        <ul>                
+            <li>Sudicio</li>                
+            <li>Avanzi</li>            
+        </ul>            
+        
+        <br>            
+        <br>            
+        
+        <h2 class="TLDNIPDA" style="text-align: center; font-size: 1.8rem; margin-top: 40px;">                
+            <i>Mi farà piacere vedervi.</i>            
+        </h2>            
+        
+        <h1 class="margin_top_s ippocampo">*</h1>            
+        
+        <div class="quest">            
+            <h3 class="t-center">Identifica la pinnata forma di vita</h3>            
+            <p id="demo"></p>            
+            <div class="ui-input-text ui-body-inherit ui-corner-all ui-shadow-inset">
+                <input type="text" width="80%" name="last" id="last" placeholder="nome comune">
+            </div>            
+            <button id="submit" class="ui-btn ui-shadow ui-corner-all">✦</button>            
             
-            <p class="intro-fade">
-                Se questo è un compleanno, guardatevi attorno amicə mortali,<br>
-                per un giorno non sarò una creatura elusiva.
-            </p>
+            <script>                
+                var risposta = document.getElementById('last');                
+                var btn = document.getElementById('submit');                                
+                let soluzione = 'pescegatto';
 
-            <div class="spaced-lines">
-                <p>Nessuna migrazione stagionale.</p>
-                <p>Nessun inseguimento.</p>
-                <p>Nessuna coordinata trasmessa da satelliti militari.</p>
-            </div>
-
-            <h1 class="main-statement">
-                Mi troverete dove l'erba insiste,<br>
-                gli alberi fanno il loro mestiere,<br>
-                ed io sto bene.
-            </h1>
-
-            <div class="details-box">
-                <p>
-                    Il <strong>15 giugno</strong> sarò al parco di <strong>Villa Spada</strong> e rimarrò lì, nel verde, dall'ora in cui la luce si distende sull'erba fino a quando arriveranno le stelle.
-                </p>
-                <p class="subtitle">Fenomeno stazionario a bassa dispersione.</p>
-            </div>
-
-            <div class="philosophy">
-                <p>Non ci sono prenotazioni.</p>
-                <p>Non ci sono programmi.</p>
-                <p>Non c'è un orario di arrivo.</p>
-                <p class="highlight">C'è soltanto un punto di aggregazione.</p>
-                <p>Se vi andrà di passare, mi farà piacere, sapete dove trovarmi.</p>
-            </div>
-
-            <section class="info-grid">
-                
-                <div class="list-block">
-                    <h2>Assetto del luogo:</h2>
-                    <ul>
-                        <li>Erba d'alberi</li>
-                        <li>Persone care</li>
-                        <li>Mucosa sonora</li>
-                        <li>pendenza</li>
-                        <li>Bus che agevolano</li>
-                    </ul>
-                </div>
-
-                <div class="list-block">
-                    <h2>Requisiti:</h2>
-                    <ul>
-                        <li>Voglia di stare al soleil</li>
-                        <li>Anche poco</li>
-                        <li>Anche tanto</li>
-                        <li>Anche per caso</li>
-                        <li>Scuse qualsiasi</li>
-                        <li>Sbrilluccichi</li>
-                    </ul>
-                </div>
-
-                <div class="list-block">
-                    <h2>Cosa portare <span class="note">(per condividere)</span>:</h2>
-                    <ul>
-                        <li>Bevande liquide per idratarsi</li>
-                        <li>Teli</li>
-                        <li>Libri, carte, giochi</li>
-                        <li>Primizie di stagione</li>
-                        <li>Ricette segrete</li>
-                        <li>Merendine innovative</li>
-                        <li>Qualunque cosa vi faccia stare bene</li>
-                    </ul>
-                </div>
-
-                <div class="list-block">
-                    <h2>Cosa non portare <span class="note">(per buon senso)</span>:</h2>
-                    <ul>
-                        <li>Plastiche monouso</li>
-                        <li>L'obbligo di restare</li>
-                        <li>L'obbligo di arrivare a un'ora precisa</li>
-                        <li>L'idea che si debba fare qualcosa di speciale</li>
-                        <li>Petardi</li>
-                    </ul>
-                </div>
-
-                <div class="list-block">
-                    <h2>Cosa ri*portare <span class="note">(a casa)</span>:</h2>
-                    <ul>
-                        <li>Sudicio</li>
-                        <li>Avanzi</li>
-                    </ul>
-                </div>
-
-            </section>
-
-            <footer class="closing-greet">
-                Mi farà piacere vedervi.
-            </footer>
-
-        </main>
+                btn.addEventListener("click", check);
+                function check() {                    
+                    let inputUtente = risposta.value.toLowerCase().replace(/\s+/g, '');
+                    if (inputUtente === soluzione) {                        
+                        location.href = "https://chat.whatsapp.com/JlMyt6adZcMEorsV8FIpkt";                    
+                    } else {                        
+                        document.getElementById("demo").innerHTML = "Nada, ti darò un consiglio ma acqua in bocca, <a href='https://www.youtube.com/watch?v=ArJXWsFBNQc'>Ameiurus melas</a>";                    
+                    }                
+                }            </script>        
+        </div>
     </div>
 
     <script src="script.js"></script>

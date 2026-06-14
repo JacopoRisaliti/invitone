@@ -30,8 +30,10 @@ let isFadingLeaves = false; // 🎭 Controlla se foglie e punti devono diventare
 let moon = { x: 0, y: 0, scale: 0, maxScale: 1 };
 
 function aggiornaPosizione(x, y) {
+  // Avendo impostato il canvas "fixed" nel CSS, le coordinate del tocco 
+  // sullo schermo corrispondono di nuovo esattamente a quelle del canvas!
   pointer.x = x / pixelScaleFactor;
-  pointer.y = (y + window.scrollY) / pixelScaleFactor; 
+  pointer.y = y / pixelScaleFactor; 
 }
 
 function startTouch(clientX, clientY) {

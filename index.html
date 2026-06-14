@@ -141,22 +141,22 @@
         <h2 class="TLDNIPDA" style="text-align: center; font-size: 1.8rem; margin-top: 20px; margin-bottom: 30px;">                
             <i>Mi farà piacere vedervi </i>            
         </h2>            
-        <br>  
-        <br>            
-        <br>
-
-        <div class="quest">
-            <p style="font-style: italic; margin-bottom: 15px;">Risolvi l'enigma degli amicə mortali per sbloccare le coordinate...</p>
-            <label for="indovinello" style="display:block; margin-bottom:10px; font-weight:bold;">Dove si nasconde la creatura elusiva?</label>
-            <input type="text" id="indovinello" placeholder="Scrivi qui la risposta..." autocomplete="off">
-            <button id="submit" onclick="controllaIndovinello()">Rivela Luogo</button>
+        ------------------------
+        
+        <div class="quadro-enigma">
+            <p style="font-style: italic; margin-bottom: 20px; font-size: 18px;">
+                C'è un dettaglio che non mi piace del paesaggio... Trovalo per sbloccare le coordinate.
+            </p>
             
-            <div id="success-box" style="display: none; margin-top: 20px;">
-                <p style="color: #4caf50; font-weight: bold; margin-bottom: 15px;">✨ Risposta esatta! La mappa è stata sbloccata: ✨</p>
-                <a id="maps-link" href="https://maps.app.goo.gl/vostrolinkreale" target="_blank">🗺️ Apri Google Maps</a>
+            <div class="contenitore-foto">
+                <img src="img/panorama.jpg" alt="Panorama dei colli" class="foto-sfondo">
+                
+                <a href="https://maps.google.com" target="_blank" class="punto-segreto" title="???"></a>
             </div>
-            <p id="error-message" style="color: #ff4a4a; font-size: 16px; margin-top: 10px; display: none;">La natura non riconosce questa risposta. Riprova.</p>
         </div>
+
+        <br>
+        <br>
 
         <h1 class="title">
             <span class="celebrate">                    

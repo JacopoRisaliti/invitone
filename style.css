@@ -65,7 +65,8 @@ html, body {
     pointer-events: none; 
 }
 
-.datone, .cover, .descrizione, h1, h2, h3, ul, .quest, #last, #submit {
+/* Abilitiamo il click anche sui nuovi elementi del panorama (.quadro-enigma e .punto-segreto) */
+.datone, .cover, .descrizione, h1, h2, h3, ul, #last, .quadro-enigma, .punto-segreto {
     pointer-events: auto;
 }
 
@@ -195,4 +196,60 @@ ul {
 /* Assicura che le liste dentro il blocco info prendano la nuova misura */
 .blocco-info ul li {
     font-size: inherit; 
+}
+
+/* ==========================================================================
+   🧩 5. NUOVA SEZIONE: PANORAMA E PUNTO SEGRETO (INDOVINELLO)
+   ========================================================================== */
+.quadro-enigma {
+    align-self: center !important;
+    margin: 40px auto;
+    max-width: 600px; /* Larghezza ottimale per schermi PC e smartphone */
+    width: 90%;
+    text-align: center;
+}
+
+.contenitore-foto {
+    position: relative; /* Fondamentale: ancora il punto segreto sopra l'immagine */
+    display: inline-block;
+    max-width: 100%;
+    border: 2px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.foto-sfondo {
+    display: block;
+    width: 100%;
+    height: auto;
+    pointer-events: none; /* Impedisce che l'immagine venga trascinata per errore */
+}
+
+/* 🎯 IL PUNTO SEGRETO INVISIBILE DI GOOGLE MAPS */
+.punto-segreto {
+    position: absolute;
+    display: block;
+    
+    /* 🔴 MODIFICA QUESTI DUE VALORI IN PERCENTUALE PER CAMBIARE LA POSIZIONE DEL PUNTO SULLA FOTO */
+    top: 50%;    /* Distanza dall'alto (es: 50% è esattamente il centro verticale) */
+    left: 50%;   /* Distanza da sinistra (es: 50% è esattamente il centro orizzontale) */
+    
+    /* 📐 DIMENSIONI DELL'AREA CLICCABILE SEGRETA */
+    width: 40px;  
+    height: 40px; 
+    margin-left: -20px; /* Centra l'area rispetto alla coordinata left (la metà di width) */
+    margin-top: -20px;  /* Centra l'area rispetto alla coordinata top (la metà di height) */
+    
+    border-radius: 50%; /* Cerchio perfetto */
+    z-index: 10;
+    
+    /* 🌬️ EFFETTO HOVER INVISIBILE */
+    cursor: pointer; /* Il cursore del mouse si trasforma in manina quando passa sul punto segreto */
+    
+    /* ⚙️ AIUTO VISIVO PER IL SITO:
+       Cambia 'transparent' con 'rgba(255, 0, 0, 0.6)' per mostrare un cerchio rosso.
+       Così potrai vedere dove si trova il punto mentre lo muovi modificando top e left. 
+       Quando hai finito, rimetti 'transparent'! */
+    background-color: transparent; 
 }

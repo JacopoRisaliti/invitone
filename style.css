@@ -1,7 +1,7 @@
 /* ==========================================================================
-   1. IMPORTA IL FONT DA GOOGLE FONTS (Macchina da scrivere)
+   1. IMPORTA I FONT DA GOOGLE FONTS
    ========================================================================== */
-@import url('https://fonts.googleapis.com/css2?family=Anonymous+Pro:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bitcount+Single:wght@100..900&family=Playwrite+AU+VIC+Guides&display=swap');
 
 @font-face {
     font-family: ippocampo;
@@ -21,15 +21,17 @@
 }
 
 /* ==========================================================================
-   2. CONFIGURAZIONE CORPO PAGINA (Ingrandito e centrato)
+   2. CONFIGURAZIONE CORPO PAGINA (Qui decidi il font globale)
    ========================================================================== */
 html, body {
-    font-family: 'Anonymous Pro', monospace !important;
+    /* 👇 Applica il font Bitcount Single a tutto il sito. */
+    font-family: 'Bitcount Single', sans-serif !important; 
+    
     background-color: #05274a; 
-    font-size: 20px; /* Ingrandimento generale del font */
+    font-size: 22px; 
     color: #ffffff !important;
     width: calc(100% - 10px);
-    text-align: center; /* Centra il testo alla base di tutto il sito */
+    text-align: center; 
 }
 
 /* 🍃 IL TUO CANVAS INTERATTIVO */
@@ -55,7 +57,7 @@ html, body {
     z-index: 2; 
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centra i blocchi orizzontalmente */
+    align-items: center; 
     overflow: auto;
     max-width: 925px;
     height: auto;
@@ -81,14 +83,14 @@ html, body {
     justify-content: center;
     align-items: center;
     margin-bottom: 10px;     
-    padding-top: 8vh !important; /* Stacco dal bordo superiore */
+    padding-top: 8vh !important; 
 }
 
 /* Numeri giganti con il Font Trash */
 .data {
-    font-family: trash, sans-serif !important; 
+    font-family: trash, sans-serif !important; /* 👈 Ripristinato il tuo font Trash */
     color: #ffffff !important;
-    font-size: 35vh;
+    font-size: 30vh;
     margin: 0 !important;    
     line-height: 0.8;       
 }
@@ -105,285 +107,68 @@ html, body {
 .title {
     padding: 2.5vh;
     grid-area: cover;
-    font-family: 'Anonymous Pro', monospace !important; 
-    color: #ffffff !important;
     font-size: 90px; 
     margin: 0 0;
     position: relative;
     text-align: center;
 }
 
-/* Forziamo la centratura assoluta su titoli e liste (prima pendevano a sinistra) */
-h3, ul {
-    align-self: center !important; /* Sposta il blocco al centro della colonna */
-    text-align: center !important; /* Centra il testo dentro il blocco */
-    margin: 5px 20px;
-    font-family: 'Anonymous Pro', monospace !important;
+/* 👇 QUESTA CLASSE RIMPICCIOLISCE SOLO I SIMBOLI ꧁꧂ */
+.celebrate {
     color: #ffffff !important;
+    font-weight: 400;
+    font-size: 22px !important; /* Più piccoli e discreti rispetto a PRATO BASE */      
+    margin: 0;
     padding: 0;
-    list-style-position: inside; /* Mette i pallini dell'elenco centrati insieme al testo */
+    font-style: italic;
+    text-align: center;
+    display: inline-block;
+}
+
+/* Centratura assoluta sui titoli delle liste */
+h3 {
+    align-self: center !important; 
+    text-align: center !important; 
+    margin: 30px 20px 10px 20px;
+    color: #ffffff !important;
+}
+
+/* Configurazione dei singoli elementi della lista */
+ul li {
+    color: #ffffff !important;
+    margin-bottom: 12px; 
+    display: block;
+    line-height: 1.4;
+}
+
+/* Mette il ramoscello prima di ogni frase */
+ul li::before {
+    content: "𓇗 "; 
+    font-weight: bold;
+    margin-right: 10px; 
 }
 
 .t-center {
     text-align: center;
 }
 
+/* Configurazione del blocco lista orientata a sinistra ma centrata nel sito */
 ul {
-    margin-bottom: 30px;
+    align-self: center !important;  
+    display: inline-block;          
+    text-align: left !important;    
+    max-width: 90%;                 
+    padding: 0;
+    margin: 0 20px 40px 20px !important; 
+    list-style: none;               
 }
 
-/* Le frasi poetiche/descrittive ora sono grandi e perfettamente al centro */
+/* Le frasi poetiche/descrittive */
 .descrizione {
     margin: 30px 20px;
-    align-self: center !important; /* Sposta il blocco al centro */
-    text-align: center !important;  /* Centra le frasi */
-    font-family: 'Anonymous Pro', monospace !important;
+    align-self: center !important; 
+    text-align: center !important;  
     color: #ffffff !important;
-    font-size: 24px;       
+    font-size: 26px;       
     line-height: 1.6;      
-}
-
-.tip {
-    align-self: center;
-    text-align: center;
-    color: #ffffff !important;
-}
-
-.celebrate {
-    font-family: 'Anonymous Pro', monospace !important; 
-    color: #ffffff !important;
-    font-weight: 400;
-    font-size: 42px;       
-    margin: 0;
-    padding: 0;
-    font-style: italic;
-    text-align: center;
-}
-
-.tnr {
-    font-family: 'Anonymous Pro', monospace !important;
-    font-weight: bold;
-    font-style: italic;
-    color: #ffffff !important;
-}
-
-.ippocampo {
-    font-family: 'Anonymous Pro', monospace !important; 
-    color: #ffffff !important;
-    font-size: 60px;
-    text-align: center;
-}
-
-.margin_top_s {
-    padding-top: 10vh;
-}
-
-.blanket {
-    grid-area: cover;
-    width: 100%;
-}
-
-.a_center {
-    display: inline-block;
-    text-align: center;
-    width: 100%;
-    margin: 0;
-    color: #ffffff !important;
-}
-
-.arrow {
-    width: 100%;
-    text-align: center;
-}
-
-/* ==========================================================================
-   4. SEZIONE INDOVINELLO
-   ========================================================================== */
-.quest {
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Centra l'input dell'indovinello */
-    color: #ffffff !important;
-}
-
-#last {
-    width: 100%;
-    max-width: 400px; /* Evita che la riga di input diventi troppo larga su PC */
-    font-family: 'Anonymous Pro', monospace !important; 
-    font-size: larger;
-    border: none;
-    border-bottom: 1px solid #ffffff; 
-    background: inherit;
-    color: #ffffff !important; 
-    outline: none;
-    margin-bottom: 2vh;
-    text-align: center;
-}
-
-#last::placeholder {
-    color: #ffffff;
-    opacity: 0.5;
-    text-align: center;
-}
-
-.TLDNIPDA i {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 15px; 
-    perspective: 1000px;
-}
-
-.TLDNIPDA span {
-    display: inline-block;
-    font-family: 'Anonymous Pro', monospace !important;
-    color: #ffffff !important;
-    animation: floatingRelic 6s ease-in-out infinite;
-    transform-origin: center;
-    filter: drop-shadow(0 5px 15px rgba(255,255,255,0.1));
-}
-
-@keyframes floatingRelic {
-    0% { transform: translate(0, 0) rotate(0deg); }
-    33% { transform: translate(-5px, 15px) rotate(3deg); }
-    66% { transform: translate(8px, -10px) rotate(-4deg); }
-    100% { transform: translate(0, 0) rotate(0deg); }
-}
-
-.TLDNIPDA span:nth-child(2n) { animation-delay: -1s; animation-duration: 7s; }
-.TLDNIPDA span:nth-child(3n) { animation-delay: -2s; animation-duration: 5s; }
-.TLDNIPDA span:nth-child(4n) { animation-delay: -3s; animation-duration: 8s; }
-
-#submit {
-    width: 100%;
-    max-width: 250px; /* Bottone proporzionato al centro */
-    height: 42px !important;
-    margin: 0 auto 5vh auto;
-    font-size: 20px;
-    border: none;
-    background-color: transparent;
-    border: 1px solid #ffffff; 
-    color: #ffffff !important;
-    font-family: 'Anonymous Pro', monospace !important;
-    cursor: pointer;
-}
-
-#submit:hover {
-    background-color: #ffffff;
-    color: #05274a !important; 
-    transition: all 0.2s ease-in-out;
-}
-
-.blink_me {
-    animation: blinker 0.1s linear infinite;
-}
-
-pre {
-    font-family: 'Anonymous Pro', monospace !important;
-    white-space: pre;
-    color: #ffffff !important;
-    text-align: center;
-}
-  
-@keyframes blinker {
-    50% { opacity: 0; }
-}
-
-/* ==========================================================================
-   5. RESPONSIVE MOBILE (Ottimizzazioni Smartphone)
-   ========================================================================== */
-@media screen and (max-width: 900px) {
-    body {
-        font-size: 16px !important; /* Testo base leggermente ridotto per schermi piccoli */
-        .datone {
-        padding-top: 25vh !important; /* <--- Distanza dal bordo superiore specifica per i telefoni */
-    }
-}
-    }
-
-    .main {
-        max-width: 92vw;
-    }
-
-    .datone {
-        padding-top: 5vh !important; /* Meno spazio in alto su mobile */
-    }
-
-    .data {
-        font-family: trash, sans-serif !important;
-        font-size: 25vh;
-        margin: 0 !important;
-        line-height: 0.8;   
-    }
-
-    .video {
-        width: 95%;
-        margin-bottom: 5vh;
-    }
-
-    .title {
-        font-size: 14vw; 
-        top: 0px;
-    }
-
-    .ippocampo {
-        font-size: 14vw;
-    }
-
-    .ippocampo:first-of-type {
-        margin-top: 5vh;
-    }
-
-    .celebrate {
-        font-size: 28px !important;  
-        top: 0px;
-    }
-
-    .descrizione {
-        font-size: 18px !important;  /* Testo leggibile ma compatto sui telefoni */
-        line-height: 1.5;
-        align-self: center !important;
-        text-align: center !important;
-    }
-
-    h3, ul {
-        align-self: center !important;
-        text-align: center !important;
-    }
-
-    .blanket {
-        position: relative;
-        top: 140px;
-    }
-
-    .pda {
-        width: 100%;
-    }
-
-    .scary {
-        width: 90%;
-    }
-
-    .match .ippocampo {
-        font-size: 15vw;
-    }
-
-    h2 {
-        font-size: 5.5vw;
-        color: #ffffff !important;
-        text-align: center;
-    }
-
-    .tip {
-        font-weight: 400;
-        padding: 0 2vh;
-    }
-
-    .pb_s {
-        margin-bottom: 2vh;
-    }
-
-    pre {
-        font-size: 6px;
-    }
 }

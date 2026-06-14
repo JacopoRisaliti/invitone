@@ -31,7 +31,7 @@ let moon = { x: 0, y: 0, scale: 0, maxScale: 1 };
 
 function aggiornaPosizione(x, y) {
   pointer.x = x / pixelScaleFactor;
-  pointer.y = y / pixelScaleFactor;
+  pointer.y = (y + window.scrollY) / pixelScaleFactor; 
 }
 
 function startTouch(clientX, clientY) {

@@ -1,12 +1,159 @@
-body {
-  margin: 0;
-  overflow: hidden;
-  background: #0b2a4a;
+/* Reset di base */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
-canvas {
-  /* This prevents the canvas from blurring the pixels */
-  image-rendering: pixelated; 
-  /* Or use 'crisp-edges' for some browsers */
-  image-rendering: crisp-edges;
-  display: block;
+
+body {
+    background-color: #05274a; /* Stesso colore di sfondo del canvas */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* Configurazione del Canvas come sfondo fisso */
+#canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1; /* Sta dietro */
+    pointer-events: auto; /* Permette al mouse/tocco di muovere le foglie */
+}
+
+/* Contenitore del testo che fluttua sopra il Canvas */
+.content-wrapper {
+    position: relative;
+    z-index: 2; /* Sta davanti */
+    width: 100%;
+    min-height: 100vh;
+    padding: 60px 24px;
+    /* pointer-events: none serve a far passare i tocchi attraverso i vuoti del testo 
+       in modo che il canvas sotto continui a reagire al dito sul telefono */
+    pointer-events: none; 
+}
+
+/* Il corpo centrale del testo, limitato nella larghezza per una lettura elegante */
+.invitation-text {
+    max-width: 600px;
+    margin: 0 auto;
+    pointer-events: auto; /* Riattiva i tocchi sul testo se l'utente vuole selezionarlo */
+}
+
+/* --- GERARCHIA DEI FONT E DELLE DIMENSIONI --- */
+
+.intro-fade {
+    font-family: "Georgia", serif;
+    font-style: italic;
+    font-size: 1.25rem;
+    color: rgba(255, 254, 230, 0.85);
+    margin-bottom: 48px;
+}
+
+.spaced-lines {
+    font-size: 1rem;
+    letter-spacing: 0.05em;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 56px;
+}
+.spaced-lines p {
+    margin-bottom: 8px;
+}
+
+/* Il titolo principale, grande e importante */
+.main-statement {
+    font-family: "Georgia", serif;
+    font-size: 2.2rem;
+    font-weight: normal;
+    line-height: 1.3;
+    color: rgb(255, 242, 64); /* Richiama il colore dorato dei tuoi punti */
+    margin-bottom: 64px;
+}
+
+@media (max-width: 480px) {
+    .main-statement { font-size: 1.7rem; } /* Si adatta ai telefoni piccoli */
+}
+
+.details-box {
+    background: rgba(5, 39, 74, 0.5); /* Sfondo leggermente scuro per leggere meglio */
+    backdrop-filter: blur(4px); /* Sfoca leggermente le foglie che passano dietro */
+    border-left: 3px solid rgba(58, 160, 92, 0.84); /* Richiama il verde delle foglie */
+    padding: 20px;
+    margin-bottom: 48px;
+    font-size: 1.15rem;
+}
+.details-box strong {
+    color: #fff;
+}
+.details-box .subtitle {
+    font-size: 0.9rem;
+    margin-top: 12px;
+    color: rgba(255, 255, 255, 0.5);
+    font-style: italic;
+}
+
+.philosophy {
+    font-size: 1.1rem;
+    margin-bottom: 64px;
+}
+.philosophy p { margin-bottom: 12px; }
+.philosophy .highlight {
+    font-weight: bold;
+    color: rgb(255, 255, 255);
+}
+
+/* Layout blocchi info */
+.info-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    margin-bottom: 64px;
+}
+
+.list-block h2 {
+    font-family: "Georgia", serif;
+    font-size: 1.3rem;
+    font-weight: normal;
+    margin-bottom: 16px;
+    color: rgba(255, 254, 230, 0.95);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 6px;
+}
+.list-block .note {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.5);
+    font-style: italic;
+}
+
+.list-block ul {
+    list-style-type: none; /* Rimuoviamo i pallini standard */
+    padding-left: 4px;
+}
+
+.list-block ul li {
+    position: relative;
+    padding-left: 16px;
+    margin-bottom: 8px;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.95rem;
+}
+
+/* Un trattino elegante invece del pallino della lista */
+.list-block ul li::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: rgba(58, 160, 92, 0.6);
+}
+
+.closing-greet {
+    font-family: "Georgia", serif;
+    font-style: italic;
+    font-size: 1.5rem;
+    text-align: center;
+    margin-top: 80px;
+    color: rgb(255, 242, 64);
 }

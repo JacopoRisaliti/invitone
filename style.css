@@ -4,5 +4,9 @@ body {
   background: #0b2a4a;
 }
 canvas {
+  /* This prevents the canvas from blurring the pixels */
+  image-rendering: pixelated; 
+  /* Or use 'crisp-edges' for some browsers */
+  image-rendering: crisp-edges;
   display: block;
 }

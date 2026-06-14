@@ -3,8 +3,11 @@ const ctx = canvas.getContext("2d");
 
 let w, h;
 function resize() {
-  w = canvas.width = window.innerWidth;
-  h = canvas.height = window.innerHeight;
+  w = canvas.width = window.innerWidth / 2;
+  h = canvas.height = window.innerHeight / 2;
+
+  canvas.style.width = window.innerWidth + "px";
+  canvas.style.height = window.innerHeight + "px";
 }
 window.addEventListener("resize", resize);
 resize();
@@ -14,8 +17,8 @@ let pointer = { x: w / 2, y: h / 2 };
 
 // Funzione unica per aggiornare la posizione
 function aggiornaPosizione(x, y) {
-  pointer.x = x;
-  pointer.y = y;
+  pointer.x = x / 2;
+  pointer.y = y / 2;
 }
 
 // Per il COMPUTER (Muovendo il mouse)
@@ -29,6 +32,7 @@ window.addEventListener("touchmove", (e) => {
   const tocco = e.touches[0];
   aggiornaPosizione(tocco.clientX, tocco.clientY);
 });
+
 // 🍃 prato iniziale
 const leaves = [];
 const N = 6000;

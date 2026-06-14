@@ -2,7 +2,7 @@ const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
 const pixelScaleFactor = 2;
-const spriteSize = 4;
+const spriteSize = 1;
 
 let w, h;
 function resize() {
@@ -38,7 +38,7 @@ window.addEventListener("touchmove", (e) => {
 
 // 🍃 prato iniziale
 const leaves = [];
-const N = 6000;
+const N = 10000;
 
 for (let i = 0; i < N; i++) {
   let x = Math.random() * w;
@@ -46,8 +46,8 @@ for (let i = 0; i < N; i++) {
 
   const colors = [
   "rgba(124,255,178,0.7)",
-  "rgba(255,180,90,0.7)",
-  "rgba(80,200,120,0.7)"
+  "rgba(255, 255, 255, 0.7)",
+  "rgba(15, 53, 32, 0.7)"
 ];
 
 const symbols = ["🍃", "·", "*"];
@@ -108,7 +108,7 @@ function draw() {
     p.x += p.vx;
     p.y += p.vy;
 
-    ctx.fillStyle = "rgba(124,255,178,0.9)";
+    ctx.fillStyle = p.color;
     ctx.fillRect(p.x, p.y, spriteSize, spriteSize);
     ctx.fillText(p.symbol, p.x, p.y);
   }

@@ -1,175 +1,255 @@
-<!DOCTYPE html>
-<html lang="it">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
+/* ==========================================================================
+   1. IMPORTA I FONT DA GOOGLE FONTS
+   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Bitcount+Single:wght@100..900&family=Playwrite+AU+VIC+Guides&display=swap');
+
+@font-face {
+    font-family: ippocampo;
+    src: url(src/font/Ippocampo-Regular.ttf);
+}
+@font-face {
+    font-family: kooky;
+    src: url(src/font/Kooky-Regular.ttf);
+}
+@font-face {
+    font-family: serpe;
+    src: url(src/font/Serpe-Regular.ttf);
+}
+@font-face {
+    font-family: trash;
+    src: url(src/font/trash/trashplusbold.otf);
+}
+
+/* ==========================================================================
+   2. CONFIGURAZIONE CORPO PAGINA (Qui decidi il font globale)
+   ========================================================================== */
+html, body {
+    /* 👇 Applica il font Bitcount Single a tutto il sito. */
+    font-family: 'Bitcount Single', sans-serif !important; 
     
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="maze.css">
+    background-color: #05274a; 
+    font-size: 22px; 
+    color: #ffffff !important;
+    width: calc(100% - 10px);
+    text-align: center; 
+}
+
+/* 🍃 IL TUO CANVAS INTERATTIVO */
+#canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1; 
+    pointer-events: auto; 
+}
+
+.ui-loader {
+    display: none;
+}
+
+/* ==========================================================================
+   3. STRUTTURA DEI TESTI (Sopra al Canvas e allineata al centro)
+   ========================================================================== */
+.main {
+    position: relative;
+    z-index: 2; 
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    overflow: auto;
+    max-width: 925px;
+    height: auto;
+    margin: auto;
+    pointer-events: none; 
+}
+
+/* 🌟 CORREZIONE: Abilitiamo esplicitamente tutti i nodi interattivi dell'enigma */
+.datone, .cover, .descrizione, h1, h2, h3, ul, #last, 
+.quadro-enigma, .contenitore-foto, .punto-segreto {
+    pointer-events: auto !important;
+}
+
+.tinder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* La data iniziale staccata dall'alto */
+.datone {
+    height: auto !important; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;     
+    padding-top: 8vh !important; 
+}
+
+/* Numeri giganti con il Font Trash */
+.data {
+    font-family: trash, sans-serif !important; 
+    color: #ffffff !important;
+    font-size: 30vh;
+    margin: 0 !important;    
+    line-height: 0.8;       
+}
+
+.cover {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: "cover";
+    position: relative;
+    width: 100%;
+}
+
+.title {
+    padding: 2.5vh;
+    grid-area: cover;
+    font-size: 90px; 
+    margin: 0 0;
+    position: relative;
+    text-align: center;
+}
+
+/* 👇 QUESTA CLASSE RIMPICCIOLISCE SOLO I SIMBOLI ꧁꧂ */
+.celebrate {
+    color: #ffffff !important;
+    font-weight: 400;
+    font-size: 22px !important; 
+    margin: 0;
+    padding: 0;
+    font-style: italic;
+    text-align: center;
+    display: inline-block;
+}
+
+/* Centratura assoluta sui titoli delle liste */
+h3 {
+    align-self: center !important; 
+    text-align: center !important; 
+    margin: 30px 20px 10px 20px;
+    color: #ffffff !important;
+}
+
+/* Configurazione dei singoli elementi della lista */
+ul li {
+    color: #ffffff !important;
+    margin-bottom: 12px; 
+    display: block;
+    line-height: 1;
+}
+
+/* Mette il ramoscello prima di ogni frase */
+ul li::before {
+    content: "𓇗 "; 
+    font-weight: bold;
+    margin-right: 10px; 
+}
+
+.t-center {
+    text-align: center;
+}
+
+/* Configurazione del blocco lista orientata a sinistra ma centrata nel sito */
+ul {
+    align-self: center !important;  
+    display: inline-block;          
+    text-align: left !important;    
+    max-width: 90%;                 
+    padding: 0;
+    margin: 0 20px 40px 20px !important; 
+    list-style: none;               
+}
+
+/* Le frasi poetiche/descrittive */
+.descrizione {
+    margin: 30px 20px;
+    align-self: center !important; 
+    text-align: center !important;  
+    color: #ffffff !important;
+    font-size: 26px;       
+    line-height: 1.6;      
+}
+
+/* ==========================================================================
+   4. PANNELLO DI CONTROLLO GRANDEZZA INFO (Da sotto INFO fino ad Avanzi)
+   ========================================================================== */
+.blocco-info {
+    /* 🛠️ REGOLA QUESTO NUMERO PER CAMBIARE LA GRANDEZZA DI TUTTA LA SEZIONE LISTE! */
+    font-size: 16px !important; 
     
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=WindSong&display=swap" rel="stylesheet">
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Riduce in proporzione anche i titoli interni alle liste (es: "PRESUPPOSTI:") */
+.blocco-info h3 {
+    font-size: 45px !important; /* Regola questo per fare i titoli delle liste più grandi o piccoli delle scritte */
+    margin-top: 25px;
+}
+
+/* Assicura che le liste dentro il blocco info prendano la nuova misura */
+.blocco-info ul li {
+    font-size: inherit; 
+}
+
+/* ==========================================================================
+   🧩 5. NUOVA SEZIONE: PANORAMA E PUNTO SEGRETO (INDOVINELLO)
+   ========================================================================== */
+.quadro-enigma {
+    align-self: center !important;
+    margin: 40px auto;
+    max-width: 600px; /* Larghezza ottimale per schermi PC e smartphone */
+    width: 90%;
+    text-align: center;
+}
+
+.contenitore-foto {
+    position: relative; /* Fondamentale: ancora il punto segreto sopra l'immagine */
+    display: inline-block;
+    max-width: 100%;
+    border: 2px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.foto-sfondo {
+    display: block;
+    width: 100%;
+    height: auto;
+    pointer-events: none; /* Impedisce che l'immagine catturi il click al posto del link */
+}
+
+/* 🎯 IL PUNTO SEGRETO INVISIBILE DI GOOGLE MAPS */
+.punto-segreto {
+    position: absolute;
+    display: block;
     
-    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script src="https://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.js"></script>
-    <script src="maze.js"></script>
-</head>
-<body>
-
-    <canvas id="canvas"></canvas>
-
-    <div class="main">
-        <div class="datone">            
-            <h1 class="data">15</h1>            
-            <h1 class="data">06</h1>        </div>        
-        
-        <div class="cover">            
-            <h1 class="title"> 
-                <br>                  
-                <span class="celebrate">                   
-                ꧁꧂  
-                </span>
-                <br>                   
-                <br>                
-                PRATO BASE 
-                <br>      
-                <br> 
-                <span class="celebrate">   
-                ꧁꧂  
-                </span>
-                <br>  
-            </h1>            
-        </div>            
-        
-        <br>
-        <br>
-        <br>
-        <p class="descrizione">                
-            Se questo è un compleanno, guardatevi attorno amicə mortali, per un giorno non sarò una creatura elusiva.
-            <br><br>                
-            Nessuna migrazione stagionale.
-            <br>𓅂
-            <br>
-            Nessun inseguimento.
-            <br>
-            Nessuna coordinata trasmessa da satelliti militari.
-            <br><br>
-            Mi troverete dove l'erba insiste, gli alberi fanno il loro mestiere, ed io sto bene. 
-            <br><br>
-            Il <strong>15 giugno</strong> sarò al parco di Villa Spada e rimarrò lì, nel verde, dall'ora in cui la luce si distende sull'erba fino a quando arriveranno le stelle.
-            <br>
-            Fenomeno stazionario a bassa dispersione.
-            <br><br>
-            Non ci sono prenotazioni. Non ci sono programmi. Non c'è un orario di arrivo.
-            <br>
-            <strong>C'è soltanto un punto di aggregazione.</strong>
-            <br><br>
-            Se vi andrà di passare, mi farà piacere, SAPETE DOVE TROVARMI.
-            <br>
-            <br>
-            <br>
-            <br>
-            <span class="celebrate">   
-            ꧁꧂  
-            </span>
-        </p>
-        
-        <br>
-        <br>
-        <br>
-        <br>
-
-        <div class="blocco-info">
-            <strong> INFO𓆤 </strong>
-            <br>
-            <br>
-
-            <h3>Ipotesi del luogo:</h3>            
-            <ul>                
-                <li>Erba d'alberi</li>                
-                <li>Persone care</li>                
-                <li>Mucosa sonora</li>            
-                <li>Pendenza gravitazionale</li>            
-                <li>Bus che agevolano</li>            
-            </ul>            
-
-            <h3>PRESUPPOSTI:</h3>            
-            <ul>                
-                <li>Voglia di stare al sole</li>                
-                <li>Anche poco</li>                
-                <li>Anche tanto</li>                
-                <li>Anche per caso</li>                                                                
-                <li>Sbrilluccichi</li>            
-            </ul>            
-            
-            <h3>COSA PORTARE (per condividere):</h3>            
-            <ul>                
-                <li>Bevande liquide per idratarsi</li>                
-                <li>Teli</li>                
-                <li>Libri, carte, giochi</li>                
-                <li>Primizie di stagione</li>                
-                <li>Ricette segrete</li>                
-                <li>Merendine innovative</li>                
-                <li>Qualunque cosa vi faccia stare bene</li>            
-            </ul>            
-            
-            <h3>COSA NON PORTARE (per buon senso):</h3>            
-            <ul>                
-                <li>Plastiche monouso</li>                
-                <li>L'obbligo di restare</li>                
-                <li>L'obbligo di arrivare a un'ora precisa</li>                
-                <li>L'idea che si debba fare qualcosa di speciale</li>                
-                <li>Petardi</li>            
-            </ul>            
-            
-            <h3>COSA RI-PORTARE (at home):</h3>            
-            <ul>                
-                <li>Sudicio</li> 
-                <li>Oggetti da riconoscere come propri</li>               
-                <li>Avanzi</li>            
-            </ul>            
-
-        </div> 
-        
-        <br>            
-        <br>  
-        <br>            
-        <br>  
-
-        <h2 class="TLDNIPDA" style="text-align: center; font-size: 1.8rem; margin-top: 20px; margin-bottom: 30px;">                
-            <i>Mi farà piacere vedervi </i>            
-        </h2>            
-        ------------------------
-        
-        <div class="quadro-enigma">
-            <p style="font-style: italic; margin-bottom: 20px; font-size: 18px;">
-                C'è un dettaglio che non mi piace del paesaggio... Trovalo per sbloccare le coordinate.
-            </p>
-            
-            <div class="contenitore-foto">
-                <img src="img/panorama.jpg" alt="Panorama dei colli" class="foto-sfondo">
-                
-                <a href="https://maps.google.com" target="_blank" class="punto-segreto" title="???"></a>
-            </div>
-        </div>
-
-        <br>
-        <br>
-
-        <h1 class="title">
-            <span class="celebrate">                    
-                <br>
-                ꧁꧂  
-                <br>
-                <br>
-                <br>
-            </span>
-        </h1>
-        
-    </div>
-
-    <script src="script.js"></script>
-</body>
-</html>
+    /* 🔴 MODIFICA QUESTI DUE VALORI IN PERCENTUALE PER SPOSTARE IL PUNTO SULLA FOTO */
+    top: 50%;    /* Distanza dall'alto (es: 45%, 60%, ecc.) */
+    left: 50%;   /* Distanza da sinistra (es: 30%, 72%, ecc.) */
+    
+    /* 📐 DIMENSIONI DELL'AREA CLICCABILE SEGRETA */
+    width: 44px;  
+    height: 44px; 
+    margin-left: -22px; /* Centra l'area rispetto alla coordinata left */
+    margin-top: -22px;  /* Centra l'area rispetto alla coordinata top */
+    
+    border-radius: 50%; /* Cerchio perfetto */
+    z-index: 999; /* Portato al massimo livello per stare sopra a tutto */
+    
+    /* 🌬️ EFFETTO HOVER INVISIBILE */
+    cursor: pointer; 
+    
+    /* ⚙️ AIUTO VISIVO PER IL DESIGNER:
+       Se vuoi vedere dove si trova, metti: rgba(255, 0, 0, 0.6) 
+       Quando hai posizionato il punto sul dettaglio alieno, rimetti: transparent */
+    background-color: transparent; 
+}

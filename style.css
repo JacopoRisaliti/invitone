@@ -140,7 +140,8 @@ ul {
     /* 🔴 MODIFICA QUESTI DUE VALORI IN PERCENTUALE PER SPOSTARE IL CERCHIO SOPRA LA SCARPA */
     top: 55%;   /* Più aumenti la %, più il cerchio scende verso il basso della foto */
     left: 59%;  /* Più aumenti la %, più il cerchio si sposta verso destra */
-    
+    margin-left: -30px; 
+    margin-top: -30px; 
     /* Dimensioni del cerchio cliccabile */
     width: 70px;  
     height: 70px; 
@@ -152,5 +153,5 @@ ul {
     
     /* 🛠️ AIUTO VISIVO: Lascialo blu elettrico finché non lo hai posizionato sopra la scarpa.
        Quando vedi che è perfetto, cancella questa riga o scrivi transparent al posto di rgb(...) */
-    background-color: transparent !important; 
+    background-color: blue !important; 
 }

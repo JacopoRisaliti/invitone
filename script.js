@@ -12,11 +12,23 @@ resize();
 // 🌬️ cursore = vento locale
 let pointer = { x: w / 2, y: h / 2 };
 
+// Funzione unica per aggiornare la posizione
+function aggiornaPosizione(x, y) {
+  pointer.x = x;
+  pointer.y = y;
+}
+
+// Per il COMPUTER (Muovendo il mouse)
 window.addEventListener("mousemove", (e) => {
-  pointer.x = e.clientX;
-  pointer.y = e.clientY;
+  aggiornaPosizione(e.clientX, e.clientY);
 });
 
+// Per il TELEFONO (Trascinando il dito)
+window.addEventListener("touchmove", (e) => {
+  // Prendiamo la posizione del primo dito che tocca lo schermo
+  const tocco = e.touches[0];
+  aggiornaPosizione(tocco.clientX, tocco.clientY);
+});
 // 🍃 prato iniziale
 const leaves = [];
 const N = 6000;

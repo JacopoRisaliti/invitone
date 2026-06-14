@@ -83,7 +83,7 @@ window.addEventListener("touchend", () => { endTouch(); });
 
 // 🍃 prato iniziale con gestione dell'opacità individuale
 const leaves = [];
-const N = 1500; 
+const N = 2000; 
 
 for (let i = 0; i < N; i++) {
   let x = Math.random() * w;
@@ -95,11 +95,11 @@ for (let i = 0; i < N; i++) {
   let coloreScelto = "";
 
   if (scelto === "🍃") {
-    coloreScelto = "rgba(58, 160, 92, 0.62)";  
+    coloreScelto = "rgba(33, 255, 107, 0.34)";  
   } else if (scelto === "*") {
-    coloreScelto = "rgba(255, 255, 255, 0.49)";     
+    coloreScelto = "rgba(255, 255, 255, 0.58)";     
   } else if (scelto === "·") {
-    coloreScelto = "rgba(255, 242, 64, 0.38)";   
+    coloreScelto = "rgba(255, 244, 93, 0.84)";   
   }
 
   leaves.push({

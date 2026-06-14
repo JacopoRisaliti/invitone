@@ -54,9 +54,9 @@ for (let i = 0; i < N; i++) {
   if (scelto === "🍃") {
     coloreScelto = "rgba(58, 160, 92, 0.84)";  // Verde smeraldo per le foglie
   } else if (scelto === "*") {
-    coloreScelto = "rgb(255, 228, 76)";     // Giallo/Oro per le stelle
+    coloreScelto = "rgb(255, 255, 255)";     // Giallo/Oro per le stelle
   } else if (scelto === "·") {
-    coloreScelto = "rgb(255, 255, 255)";   // Bianco per i punti
+    coloreScelto = "rgb(255, 231, 95)";   // Bianco per i punti
   }
 
   leaves.push({

@@ -2,7 +2,6 @@ const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
 const pixelScaleFactor = 1;
-const spriteSize = 1;
 
 let w, h;
 function resize() {
@@ -11,6 +10,10 @@ function resize() {
 
   canvas.style.width = window.innerWidth + "px";
   canvas.style.height = window.innerHeight + "px";
+  
+  ctx.font = "17px serif"; 
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
 }
 window.addEventListener("resize", resize);
 resize();
@@ -18,45 +21,83 @@ resize();
 // 🌬️ cursore = vento locale
 let pointer = { x: w / 2, y: h / 2 };
 
-// Funzione unica per aggiornare la posizione
+// 🌙 STATO DELLA LUNA E DELLE FOGLIE
+let isTouching = false;    
+let deveEmergere = false;  
+let moonTimer = null;      
+let leavesTimer = null;    // ⏱️ Nuovo timer per la sparizione di foglie/punti
+let isFadingLeaves = false; // 🎭 Controlla se foglie e punti devono diventare trasparenti
+let moon = { x: 0, y: 0, scale: 0, maxScale: 1 };
+
 function aggiornaPosizione(x, y) {
   pointer.x = x / pixelScaleFactor;
   pointer.y = y / pixelScaleFactor;
 }
 
-// Per il COMPUTER (Muovendo il mouse)
-window.addEventListener("mousemove", (e) => {
-  aggiornaPosizione(e.clientX, e.clientY);
-});
+function startTouch(clientX, clientY) {
+  isTouching = true;
+  deveEmergere = false;
+  isFadingLeaves = false; // Al tocco, resetta subito la trasparenza (tutto torna visibile)
+  
+  // Cancella tutti i timer attivi
+  if (moonTimer) { clearTimeout(moonTimer); moonTimer = null; }
+  if (leavesTimer) { clearTimeout(leavesTimer); leavesTimer = null; }
+  
+  aggiornaPosizione(clientX, clientY);
+}
 
-// Per il TELEFONO (Trascinando il dito)
-window.addEventListener("touchmove", (e) => {
-  const tocco = e.touches[0];
-  aggiornaPosizione(tocco.clientX, tocco.clientY);
-});
+function endTouch() {
+  isTouching = false;
+  
+  moon.x = pointer.x;
+  moon.y = pointer.y;
 
-// 🍃 prato iniziale
+  // 1️⃣ Primo Timer: Aspetta 1 secondo per far emergere la luna
+  moonTimer = setTimeout(() => {
+    if (!isTouching) { 
+      deveEmergere = true;
+      
+      // 2️⃣ Secondo Timer: Dopo che la luna è emersa, aspetta un altro secondo (1000ms) per far sparire foglie e punti
+      leavesTimer = setTimeout(() => {
+        if (!isTouching && deveEmergere) {
+          isFadingLeaves = true;
+        }
+      }, 1000);
+
+    }
+  }, 1000);
+}
+
+// Eventi Mouse (Computer)
+window.addEventListener("mousemove", (e) => { aggiornaPosizione(e.clientX, e.clientY); });
+window.addEventListener("mousedown", (e) => { startTouch(e.clientX, e.clientY); });
+window.addEventListener("mouseup", () => { endTouch(); });
+
+// Eventi Touch (Telefono)
+window.addEventListener("touchmove", (e) => { const tocco = e.touches[0]; aggiornaPosizione(tocco.clientX, tocco.clientY); });
+window.addEventListener("touchstart", (e) => { const tocco = e.touches[0]; startTouch(tocco.clientX, tocco.clientY); });
+window.addEventListener("touchend", () => { endTouch(); });
+
+
+// 🍃 prato iniziale con gestione dell'opacità individuale
 const leaves = [];
-const N = 3000; // ⚠️ Ho abbassato a 3000 per farlo andare fluido e senza scatti anche sul cellulare!
+const N = 1500; 
 
 for (let i = 0; i < N; i++) {
   let x = Math.random() * w;
   let y = Math.random() * h;
 
-  // 1. Scegliamo prima il simbolo in modo casuale
   const symbols = ["🍃", "·", "*"];
   const scelto = symbols[Math.floor(Math.random() * symbols.length)];
   
-  // 2. Inizializziamo la variabile del colore
   let coloreScelto = "";
 
-  // 3. Associazioni fisse: SE è un simbolo, ALLORA usa quel colore specifico
   if (scelto === "🍃") {
-    coloreScelto = "rgba(58, 160, 92, 0.84)";  // Verde smeraldo per le foglie
+    coloreScelto = "rgba(58, 160, 92, 0.84)";  
   } else if (scelto === "*") {
-    coloreScelto = "rgb(255, 255, 255)";     // Giallo/Oro per le stelle
+    coloreScelto = "rgb(255, 255, 255)";     
   } else if (scelto === "·") {
-    coloreScelto = "rgb(255, 231, 95)";   // Bianco per i punti
+    coloreScelto = "rgb(255, 242, 64)";   
   }
 
   leaves.push({
@@ -67,65 +108,97 @@ for (let i = 0; i < N; i++) {
     baseX: x,
     baseY: y,
     symbol: scelto,       
-    color: coloreScelto   
+    color: coloreScelto,
+    opacity: 1.0 // 🌟 Ogni particella parte con opacità massima (100%)
   });
-} // 🌟 [CORRETTO]: Qui finisce il ciclo di creazione senza doppioni!
+}
 
 // 🌬️ vento locale (repulsione)
 function wind(p) {
   let dx = p.x - pointer.x;
   let dy = p.y - pointer.y;
-
   let distSq = dx * dx + dy * dy;
-  let radius = 33;
+  let radius = 51; 
   let radiusSq = radius * radius;
 
   if (distSq < radiusSq) {
     let force = (radiusSq - distSq) / radiusSq;
-
-    p.vx += dx * 0.3 * force;
-    p.vy += dy * 0.3 * force;
+    p.vx += dx * 0.5 * force; 
+    p.vy += dy * 0.5 * force;
   }
-
-  // micro caos naturale
   p.vx += (Math.random() - 0.5) * 0.02;
   p.vy += (Math.random() - 0.5) * 0.02;
 }
 
-// 🌿 ritorno al prato (FORZA DI MEMORIA)
+// 🌿 ritorno al prato
 function returnToBase(p) {
-  p.vx += (p.baseX - p.x) * 0.003;
-  p.vy += (p.baseY - p.y) * 0.003;
+  p.vx += (p.baseX - p.x) * 0.005;
+  p.vy += (p.baseY - p.y) * 0.005;
 }
 
 function draw() {
   ctx.fillStyle = "#05274a";
   ctx.fillRect(0, 0, w, h);
 
+  // 🌙 LOGICA DELLA LUNA
+  if (!isTouching && deveEmergere) {
+    if (moon.scale < moon.maxScale) moon.scale += 0.02; 
+  } else {
+    if (moon.scale > 0) moon.scale -= 0.05; 
+  }
+
+  // Disegno grafico della luna
+  if (moon.scale > 0) {
+    ctx.save();
+    ctx.fillStyle = "rgba(255, 254, 230, " + (moon.scale * 0.9) + ")"; 
+    let raggioLuna = 25 * moon.scale; 
+    ctx.beginPath();
+    ctx.arc(moon.x, moon.y, raggioLuna, 0, Math.PI * 2);
+    ctx.fill();
+    
+    ctx.fillStyle = "#05274a";
+    ctx.beginPath();
+    ctx.arc(moon.x + (raggioLuna * 0.4), moon.y - (raggioLuna * 0.2), raggioLuna * 0.9, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+  }
+
+  // 🍃 DISEGNO DELLE FOGLIE E DELLE STELLE
   for (let p of leaves) {
     wind(p);
     returnToBase(p);
 
-    // 🌬️ attrito (equilibrio energia)
     p.vx *= 0.90;
     p.vy *= 0.90;
-
     p.x += p.vx;
     p.y += p.vy;
 
-    // Impostiamo il colore specifico della particella attuale
+    // 🌟 GESTIONE DELLE TRASPARENZE DINAMICHE
+    if (isFadingLeaves) {
+      // Se dobbiamo nasconderle, riduciamo l'opacità di foglie e punti
+      if (p.symbol === "🍃" || p.symbol === "·") {
+        if (p.opacity > 0) p.opacity -= 0.02; // Velocità di sparizione
+      }
+    } else {
+      // Se l'utente tocca lo schermo, tutto ritorna visibile gradualmente (o all'istante se aumenti il valore)
+      if (p.opacity < 1.0) p.opacity += 0.1; 
+    }
+
+    // Se l'opacità è a 0, saltiamo il disegno per risparmiare calcoli
+    if (p.opacity <= 0) continue;
+
+    ctx.save();
+    // Applichiamo l'opacità corrente al disegno nel Canvas globalmente per questa particella
+    ctx.globalAlpha = p.opacity;
     ctx.fillStyle = p.color;
 
     if (p.symbol === "🍃") {
-      // Se vuoi dare sfumature diverse all'emoji, cambia lo 0deg (es: 90deg la fa diventare azzurra)
       ctx.filter = "hue-rotate(0deg)"; 
       ctx.fillText(p.symbol, p.x, p.y);
-      ctx.filter = "none"; // Resetta per non rovinare le stelle e i punti
     } else {
-      // Disegna il quadratino piccolo di sfondo (solo per stelle e punti) e poi il testo
-      ctx.fillRect(p.x, p.y, spriteSize, spriteSize);
       ctx.fillText(p.symbol, p.x, p.y);
     }
+    ctx.restore();
   }
 
   requestAnimationFrame(draw);

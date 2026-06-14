@@ -1,10 +1,13 @@
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
+const pixelScaleFactor = 2;
+const spriteSize = 4;
+
 let w, h;
 function resize() {
-  w = canvas.width = window.innerWidth / 2;
-  h = canvas.height = window.innerHeight / 2;
+  w = canvas.width = window.innerWidth / pixelScaleFactor;
+  h = canvas.height = window.innerHeight / pixelScaleFactor;
 
   canvas.style.width = window.innerWidth + "px";
   canvas.style.height = window.innerHeight + "px";
@@ -17,8 +20,8 @@ let pointer = { x: w / 2, y: h / 2 };
 
 // Funzione unica per aggiornare la posizione
 function aggiornaPosizione(x, y) {
-  pointer.x = x / 2;
-  pointer.y = y / 2;
+  pointer.x = x / pixelScaleFactor;
+  pointer.y = y / pixelScaleFactor;
 }
 
 // Per il COMPUTER (Muovendo il mouse)
@@ -106,7 +109,7 @@ function draw() {
     p.y += p.vy;
 
     ctx.fillStyle = "rgba(124,255,178,0.9)";
-    ctx.fillRect(p.x, p.y, 1, 1);
+    ctx.fillRect(p.x, p.y, spriteSize, spriteSize);
     ctx.fillText(p.symbol, p.x, p.y);
   }
 

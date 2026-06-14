@@ -1,40 +1,17 @@
-/* ==========================================================================
-   1. IMPORTA I FONT DA GOOGLE FONTS
-   ========================================================================== */
 @import url('https://fonts.googleapis.com/css2?family=Bitcount+Single:wght@100..900&family=Playwrite+AU+VIC+Guides&display=swap');
 
-@font-face {
-    font-family: ippocampo;
-    src: url(src/font/Ippocampo-Regular.ttf);
-}
-@font-face {
-    font-family: kooky;
-    src: url(src/font/Kooky-Regular.ttf);
-}
-@font-face {
-    font-family: serpe;
-    src: url(src/font/Serpe-Regular.ttf);
-}
-@font-face {
-    font-family: trash;
-    src: url(src/font/trash/trashplusbold.otf);
-}
-
-/* ==========================================================================
-   2. CONFIGURAZIONE CORPO PAGINA (Qui decidi il font globale)
-   ========================================================================== */
 html, body {
-    /* 👇 Applica il font Bitcount Single a tutto il sito. */
     font-family: 'Bitcount Single', sans-serif !important; 
-    
     background-color: #05274a; 
     font-size: 22px; 
     color: #ffffff !important;
-    width: calc(100% - 10px);
+    width: 100%;
+    margin: 0;
+    padding: 0;
     text-align: center; 
+    overflow-x: hidden;
 }
 
-/* 🍃 IL TUO CANVAS INTERATTIVO */
 #canvas {
     position: fixed;
     top: 0;
@@ -42,41 +19,21 @@ html, body {
     width: 100vw;
     height: 100vh;
     z-index: 1; 
-    pointer-events: auto; 
+    pointer-events: none; /* Fa passare i click sotto */
 }
 
-.ui-loader {
-    display: none;
-}
-
-/* ==========================================================================
-   3. STRUTTURA DEI TESTI (Sopra al Canvas e allineata al centro)
-   ========================================================================== */
 .main {
     position: relative;
     z-index: 2; 
     display: flex;
     flex-direction: column;
     align-items: center; 
-    overflow: auto;
     max-width: 925px;
-    height: auto;
-    margin: auto;
-    pointer-events: none; 
+    margin: 0 auto;
+    padding: 20px;
+    pointer-events: auto !important; /* Abilita i click su tutto il testo */
 }
 
-/* Abilitiamo il click anche sui nuovi elementi del panorama (.quadro-enigma e .punto-segreto) */
-.datone, .cover, .descrizione, h1, h2, h3, ul, #last, .quadro-enigma, .punto-segreto {
-    pointer-events: auto;
-}
-
-.tinder {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* La data iniziale staccata dall'alto */
 .datone {
     height: auto !important; 
     display: flex;
@@ -87,75 +44,45 @@ html, body {
     padding-top: 8vh !important; 
 }
 
-/* Numeri giganti con il Font Trash */
 .data {
-    font-family: trash, sans-serif !important; 
+    font-family: sans-serif; /* Usiamo momentaneamente di sistema */
     color: #ffffff !important;
-    font-size: 30vh;
+    font-size: 20vh;
     margin: 0 !important;    
     line-height: 0.8;       
 }
 
 .cover {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr;
-    grid-template-areas: "cover";
-    position: relative;
     width: 100%;
 }
 
 .title {
-    padding: 2.5vh;
-    grid-area: cover;
-    font-size: 90px; 
-    margin: 0 0;
-    position: relative;
+    font-size: 70px; 
     text-align: center;
 }
 
-/* 👇 QUESTA CLASSE RIMPICCIOLISCE SOLO I SIMBOLI ꧁꧂ */
 .celebrate {
-    color: #ffffff !important;
-    font-weight: 400;
     font-size: 22px !important; 
-    margin: 0;
-    padding: 0;
     font-style: italic;
-    text-align: center;
     display: inline-block;
 }
 
-/* Centratura assoluta sui titoli delle liste */
 h3 {
-    align-self: center !important; 
-    text-align: center !important; 
     margin: 30px 20px 10px 20px;
-    color: #ffffff !important;
 }
 
-/* Configurazione dei singoli elementi della lista */
 ul li {
-    color: #ffffff !important;
     margin-bottom: 12px; 
     display: block;
-    line-height: 1;
+    line-height: 1.4;
 }
 
-/* Mette il ramoscello prima di ogni frase */
 ul li::before {
     content: "𓇗 "; 
-    font-weight: bold;
     margin-right: 10px; 
 }
 
-.t-center {
-    text-align: center;
-}
-
-/* Configurazione del blocco lista orientata a sinistra ma centrata nel sito */
 ul {
-    align-self: center !important;  
     display: inline-block;          
     text-align: left !important;    
     max-width: 90%;                 
@@ -164,92 +91,59 @@ ul {
     list-style: none;               
 }
 
-/* Le frasi poetiche/descrittive */
 .descrizione {
     margin: 30px 20px;
-    align-self: center !important; 
-    text-align: center !important;  
-    color: #ffffff !important;
     font-size: 26px;       
     line-height: 1.6;      
 }
 
-/* ==========================================================================
-   4. PANNELLO DI CONTROLLO GRANDEZZA INFO (Da sotto INFO fino ad Avanzi)
-   ========================================================================== */
 .blocco-info {
-    /* 🛠️ REGOLA QUESTO NUMERO PER CAMBIARE LA GRANDEZZA DI TUTTA LA SEZIONE LISTE! */
     font-size: 16px !important; 
-    
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-/* Riduce in proporzione anche i titoli interni alle liste (es: "PRESUPPOSTI:") */
 .blocco-info h3 {
-    font-size: 45px !important; /* Regola questo per fare i titoli delle liste più grandi o piccoli delle scritte */
+    font-size: 45px !important; 
     margin-top: 25px;
 }
 
-/* Assicura che le liste dentro il blocco info prendano la nuova misura */
-.blocco-info ul li {
-    font-size: inherit; 
-}
-
-/* ==========================================================================
-   🧩 5. NUOVA SEZIONE: PANORAMA E PUNTO SEGRETO (INDOVINELLO)
-   ========================================================================== */
+/* 🧩 ENIGMA FOTO */
 .quadro-enigma {
-    align-self: center !important;
     margin: 40px auto;
-    max-width: 600px; /* Larghezza ottimale per schermi PC e smartphone */
+    max-width: 600px; 
     width: 90%;
-    text-align: center;
+    z-index: 10;
 }
 
 .contenitore-foto {
-    position: relative; /* Fondamentale: ancora il punto segreto sopra l'immagine */
+    position: relative; 
     display: inline-block;
-    max-width: 100%;
-    border: 2px solid rgba(255, 255, 255, 0.15);
+    width: 100%;
+    border: 2px solid white;
     border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
 .foto-sfondo {
     display: block;
     width: 100%;
     height: auto;
-    pointer-events: none; /* Impedisce che l'immagine venga trascinata per errore */
 }
 
-/* 🎯 IL PUNTO SEGRETO INVISIBILE DI GOOGLE MAPS */
+/* 🎯 CERCHIO ROSSO DEL PUNTO SEGRETO ACCESO PER TEST */
 .punto-segreto {
     position: absolute;
     display: block;
-    
-    /* 🔴 MODIFICA QUESTI DUE VALORI IN PERCENTUALE PER CAMBIARE LA POSIZIONE DEL PUNTO SULLA FOTO */
-    top: 50%;    /* Distanza dall'alto (es: 50% è esattamente il centro verticale) */
-    left: 50%;   /* Distanza da sinistra (es: 50% è esattamente il centro orizzontale) */
-    
-    /* 📐 DIMENSIONI DELL'AREA CLICCABILE SEGRETA */
-    width: 40px;  
-    height: 40px; 
-    margin-left: -20px; /* Centra l'area rispetto alla coordinata left (la metà di width) */
-    margin-top: -20px;  /* Centra l'area rispetto alla coordinata top (la metà di height) */
-    
-    border-radius: 50%; /* Cerchio perfetto */
-    z-index: 10;
-    
-    /* 🌬️ EFFETTO HOVER INVISIBILE */
-    cursor: pointer; /* Il cursore del mouse si trasforma in manina quando passa sul punto segreto */
-    
-    /* ⚙️ AIUTO VISIVO PER IL SITO:
-       Cambia 'transparent' con 'rgba(255, 0, 0, 0.6)' per mostrare un cerchio rosso.
-       Così potrai vedere dove si trova il punto mentre lo muovi modificando top e left. 
-       Quando hai finito, rimetti 'transparent'! */
-    background-color: transparent; 
+    top: 50%;    
+    left: 50%;   
+    width: 60px;  
+    height: 60px; 
+    margin-left: -30px; 
+    margin-top: -30px;  
+    border-radius: 50%; 
+    z-index: 999; 
+    cursor: pointer; 
+    background-color: rgb(64, 66, 202) !important; /* Lo lasciamo rosso finché non lo posizioni */
 }

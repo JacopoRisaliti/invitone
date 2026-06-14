@@ -88,7 +88,7 @@ html, body {
 
 /* Numeri giganti con il Font Trash */
 .data {
-    font-family: trash, sans-serif !important; /* 👈 Ripristinato il tuo font Trash */
+    font-family: trash, sans-serif !important; 
     color: #ffffff !important;
     font-size: 30vh;
     margin: 0 !important;    
@@ -117,7 +117,7 @@ html, body {
 .celebrate {
     color: #ffffff !important;
     font-weight: 400;
-    font-size: 22px !important; /* Più piccoli e discreti rispetto a PRATO BASE */      
+    font-size: 22px !important; 
     margin: 0;
     padding: 0;
     font-style: italic;
@@ -138,7 +138,7 @@ ul li {
     color: #ffffff !important;
     margin-bottom: 12px; 
     display: block;
-    line-height: 1.4;
+    line-height: 1;
 }
 
 /* Mette il ramoscello prima di ogni frase */
@@ -171,4 +171,28 @@ ul {
     color: #ffffff !important;
     font-size: 26px;       
     line-height: 1.6;      
+}
+
+/* ==========================================================================
+   4. PANNELLO DI CONTROLLO GRANDEZZA INFO (Da sotto INFO fino ad Avanzi)
+   ========================================================================== */
+.blocco-info {
+    /* 🛠️ REGOLA QUESTO NUMERO PER CAMBIARE LA GRANDEZZA DI TUTTA LA SEZIONE LISTE! */
+    font-size: 16px !important; 
+    
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Riduce in proporzione anche i titoli interni alle liste (es: "PRESUPPOSTI:") */
+.blocco-info h3 {
+    font-size: 45px !important; /* Regola questo per fare i titoli delle liste più grandi o piccoli delle scritte */
+    margin-top: 25px;
+}
+
+/* Assicura che le liste dentro il blocco info prendano la nuova misura */
+.blocco-info ul li {
+    font-size: inherit; 
 }

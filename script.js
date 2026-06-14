@@ -83,7 +83,7 @@ window.addEventListener("touchend", () => { endTouch(); });
 
 // 🍃 prato iniziale con gestione dell'opacità individuale
 const leaves = [];
-const N = 2000; 
+const N = 1000; 
 
 for (let i = 0; i < N; i++) {
   let x = Math.random() * w;

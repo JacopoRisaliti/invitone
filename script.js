@@ -95,11 +95,11 @@ for (let i = 0; i < N; i++) {
   let coloreScelto = "";
 
   if (scelto === "🍃") {
-    coloreScelto = "rgba(58, 160, 92, 0.84)";  
+    coloreScelto = "rgba(58, 160, 92, 0.62)";  
   } else if (scelto === "*") {
-    coloreScelto = "rgb(255, 255, 255)";     
+    coloreScelto = "rgba(255, 255, 255, 0.49)";     
   } else if (scelto === "·") {
-    coloreScelto = "rgb(255, 242, 64)";   
+    coloreScelto = "rgba(255, 242, 64, 0.38)";   
   }
 
   leaves.push({

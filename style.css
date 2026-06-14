@@ -3,7 +3,6 @@
    ========================================================================== */
 @import url('https://fonts.googleapis.com/css2?family=Anonymous+Pro:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
-/* Mantengo i suoi font locali per sicurezza, ma verranno sovrascritti */
 @font-face {
     font-family: ippocampo;
     src: url(src/font/Ippocampo-Regular.ttf);
@@ -22,27 +21,26 @@
 }
 
 /* ==========================================================================
-   2. CONFIGURAZIONE CORPO PAGINA (Colore 100% bianco e font macchina da scrivere)
+   2. CONFIGURAZIONE CORPO PAGINA (Ingrandito e centrato)
    ========================================================================== */
 html, body {
-    /* Applicato il font da macchina da scrivere ovunque */
     font-family: 'Anonymous Pro', monospace !important;
-    background-color: #05274a; /* Sfondo scuro per far risaltare il tuo prato e la luna */
-    
-    /* FORZATURA COLORE BIANCO PURO AL 100% DI INTENSITÀ */
+    background-color: #05274a; 
+    font-size: 20px; /* Ingrandimento generale del font */
     color: #ffffff !important;
     width: calc(100% - 10px);
+    text-align: center; /* Centra il testo alla base di tutto il sito */
 }
 
-/* 🍃 IL TUO CANVAS INTERATTIVO: Bloccato sullo sfondo e reattivo al tocco */
+/* 🍃 IL TUO CANVAS INTERATTIVO */
 #canvas {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    z-index: 1; /* Sotto al testo */
-    pointer-events: auto; /* Permette alle foglie di muoversi al tocco */
+    z-index: 1; 
+    pointer-events: auto; 
 }
 
 .ui-loader {
@@ -50,23 +48,21 @@ html, body {
 }
 
 /* ==========================================================================
-   3. STRUTTURA DEI TESTI (Sopra al Canvas)
+   3. STRUTTURA DEI TESTI (Sopra al Canvas e allineata al centro)
    ========================================================================== */
 .main {
     position: relative;
-    z-index: 2; /* Sopra al canvas */
+    z-index: 2; 
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: center; /* Centra i blocchi orizzontalmente */
     overflow: auto;
     max-width: 925px;
     height: auto;
     margin: auto;
-    /* Fa passare il tocco del dito attraverso gli spazi vuoti del testo verso il canvas */
     pointer-events: none; 
 }
 
-/* Riattiva il tocco per poter interagire con i link, l'indovinello e selezionare il testo */
 .datone, .cover, .descrizione, h1, h2, h3, ul, .quest, #last, #submit {
     pointer-events: auto;
 }
@@ -77,18 +73,24 @@ html, body {
     justify-content: center;
 }
 
+/* La data iniziale staccata dall'alto */
 .datone {
-    height: 100vh;
+    height: auto !important; 
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;     
+    padding-top: 8vh !important; /* Stacco dal bordo superiore */
 }
 
+/* Numeri giganti con il Font Trash */
 .data {
-    font-family: 'Anonymous Pro', monospace !important; /* Sovrascritto */
+    font-family: trash, sans-serif !important; 
     color: #ffffff !important;
     font-size: 35vh;
-    margin: 0;
+    margin: 0 !important;    
+    line-height: 0.8;       
 }
 
 .cover {
@@ -103,19 +105,23 @@ html, body {
 .title {
     padding: 2.5vh;
     grid-area: cover;
-    font-family: 'Anonymous Pro', monospace !important; /* Sovrascritto */
+    font-family: 'Anonymous Pro', monospace !important; 
     color: #ffffff !important;
-    font-size: 90px; /* Ridotto leggermente per farlo stare bene con il nuovo font */
+    font-size: 90px; 
     margin: 0 0;
     position: relative;
     text-align: center;
 }
 
+/* Forziamo la centratura assoluta su titoli e liste (prima pendevano a sinistra) */
 h3, ul {
-    align-self: flex-start;
+    align-self: center !important; /* Sposta il blocco al centro della colonna */
+    text-align: center !important; /* Centra il testo dentro il blocco */
     margin: 5px 20px;
     font-family: 'Anonymous Pro', monospace !important;
     color: #ffffff !important;
+    padding: 0;
+    list-style-position: inside; /* Mette i pallini dell'elenco centrati insieme al testo */
 }
 
 .t-center {
@@ -126,11 +132,15 @@ ul {
     margin-bottom: 30px;
 }
 
+/* Le frasi poetiche/descrittive ora sono grandi e perfettamente al centro */
 .descrizione {
     margin: 30px 20px;
-    align-self: flex-start;
+    align-self: center !important; /* Sposta il blocco al centro */
+    text-align: center !important;  /* Centra le frasi */
     font-family: 'Anonymous Pro', monospace !important;
     color: #ffffff !important;
+    font-size: 24px;       
+    line-height: 1.6;      
 }
 
 .tip {
@@ -140,13 +150,14 @@ ul {
 }
 
 .celebrate {
-    font-family: 'Anonymous Pro', monospace !important; /* Sovrascritto */
+    font-family: 'Anonymous Pro', monospace !important; 
     color: #ffffff !important;
     font-weight: 400;
-    font-size: 30px;
+    font-size: 42px;       
     margin: 0;
     padding: 0;
     font-style: italic;
+    text-align: center;
 }
 
 .tnr {
@@ -157,9 +168,10 @@ ul {
 }
 
 .ippocampo {
-    font-family: 'Anonymous Pro', monospace !important; /* Sovrascritto */
+    font-family: 'Anonymous Pro', monospace !important; 
     color: #ffffff !important;
     font-size: 60px;
+    text-align: center;
 }
 
 .margin_top_s {
@@ -190,17 +202,19 @@ ul {
 .quest {
     display: flex;
     flex-direction: column;
+    align-items: center; /* Centra l'input dell'indovinello */
     color: #ffffff !important;
 }
 
 #last {
     width: 100%;
-    font-family: 'Anonymous Pro', monospace !important; /* Sovrascritto */
+    max-width: 400px; /* Evita che la riga di input diventi troppo larga su PC */
+    font-family: 'Anonymous Pro', monospace !important; 
     font-size: larger;
     border: none;
-    border-bottom: 1px solid #ffffff; /* Riga bianca */
+    border-bottom: 1px solid #ffffff; 
     background: inherit;
-    color: #ffffff !important; /* Testo input bianco 100% */
+    color: #ffffff !important; 
     outline: none;
     margin-bottom: 2vh;
     text-align: center;
@@ -212,7 +226,6 @@ ul {
     text-align: center;
 }
 
-/* Animazione delle scritte fluttuanti dei Professionisti dell'Amore (Mantenuta!) */
 .TLDNIPDA i {
     display: flex;
     flex-wrap: wrap;
@@ -243,13 +256,13 @@ ul {
 
 #submit {
     width: 100%;
+    max-width: 250px; /* Bottone proporzionato al centro */
     height: 42px !important;
-    margin: 0;
-    margin-bottom: 5vh;
+    margin: 0 auto 5vh auto;
     font-size: 20px;
     border: none;
     background-color: transparent;
-    border: 1px solid #ffffff; /* Bottone con bordo bianco */
+    border: 1px solid #ffffff; 
     color: #ffffff !important;
     font-family: 'Anonymous Pro', monospace !important;
     cursor: pointer;
@@ -257,7 +270,7 @@ ul {
 
 #submit:hover {
     background-color: #ffffff;
-    color: #05274a !important; /* Scritta scura al passaggio del mouse */
+    color: #05274a !important; 
     transition: all 0.2s ease-in-out;
 }
 
@@ -269,6 +282,7 @@ pre {
     font-family: 'Anonymous Pro', monospace !important;
     white-space: pre;
     color: #ffffff !important;
+    text-align: center;
 }
   
 @keyframes blinker {
@@ -276,11 +290,30 @@ pre {
 }
 
 /* ==========================================================================
-   5. RESPONSIVE MOBILE (Adattamenti per smartphone)
+   5. RESPONSIVE MOBILE (Ottimizzazioni Smartphone)
    ========================================================================== */
 @media screen and (max-width: 900px) {
+    body {
+        font-size: 16px !important; /* Testo base leggermente ridotto per schermi piccoli */
+        .datone {
+        padding-top: 25vh !important; /* <--- Distanza dal bordo superiore specifica per i telefoni */
+    }
+}
+    }
+
     .main {
         max-width: 92vw;
+    }
+
+    .datone {
+        padding-top: 5vh !important; /* Meno spazio in alto su mobile */
+    }
+
+    .data {
+        font-family: trash, sans-serif !important;
+        font-size: 25vh;
+        margin: 0 !important;
+        line-height: 0.8;   
     }
 
     .video {
@@ -289,13 +322,8 @@ pre {
     }
 
     .title {
-        font-size: 14vw; /* Ottimizzato per il nuovo font macchina da scrivere */
+        font-size: 14vw; 
         top: 0px;
-    }
-
-    .data {
-        font-size: 25vh;
-        margin: 0;
     }
 
     .ippocampo {
@@ -307,8 +335,20 @@ pre {
     }
 
     .celebrate {
-        font-size: 5.5vw;
+        font-size: 28px !important;  
         top: 0px;
+    }
+
+    .descrizione {
+        font-size: 18px !important;  /* Testo leggibile ma compatto sui telefoni */
+        line-height: 1.5;
+        align-self: center !important;
+        text-align: center !important;
+    }
+
+    h3, ul {
+        align-self: center !important;
+        text-align: center !important;
     }
 
     .blanket {
@@ -331,6 +371,7 @@ pre {
     h2 {
         font-size: 5.5vw;
         color: #ffffff !important;
+        text-align: center;
     }
 
     .tip {

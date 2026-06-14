@@ -31,14 +31,13 @@ window.addEventListener("mousemove", (e) => {
 
 // Per il TELEFONO (Trascinando il dito)
 window.addEventListener("touchmove", (e) => {
-  // Prendiamo la posizione del primo dito che tocca lo schermo
   const tocco = e.touches[0];
   aggiornaPosizione(tocco.clientX, tocco.clientY);
 });
 
 // 🍃 prato iniziale
 const leaves = [];
-const N = 10000; // Ricorda di abbassare questo numero (es. 3000) se il telefono va a scatti!
+const N = 3000; // ⚠️ Ho abbassato a 3000 per farlo andare fluido e senza scatti anche sul cellulare!
 
 for (let i = 0; i < N; i++) {
   let x = Math.random() * w;
@@ -55,9 +54,9 @@ for (let i = 0; i < N; i++) {
   if (scelto === "🍃") {
     coloreScelto = "rgba(58, 160, 92, 0.84)";  // Verde smeraldo per le foglie
   } else if (scelto === "*") {
-    coloreScelto = "rgb(255, 228, 76)";    // Giallo/Oro per le stelle
+    coloreScelto = "rgb(255, 228, 76)";     // Giallo/Oro per le stelle
   } else if (scelto === "·") {
-    coloreScelto = "rgb(255, 255, 255)";  // Bianco semi-trasparente per i punti
+    coloreScelto = "rgb(255, 255, 255)";   // Bianco per i punti
   }
 
   leaves.push({
@@ -67,25 +66,10 @@ for (let i = 0; i < N; i++) {
     vy: 0,
     baseX: x,
     baseY: y,
-    symbol: scelto,       // Salva il simbolo assegnato
-    color: coloreScelto   // Salva il colore abbinato a quel simbolo
+    symbol: scelto,       
+    color: coloreScelto   
   });
-}
-
-const symbols = ["🍃", "·", "*"];
-
-leaves.push({
-  x,
-  y,
-  vx: 0,
-  vy: 0,
-  baseX: x,
-  baseY: y,
-
-  symbol: symbols[Math.floor(Math.random() * 3)],
-  color: colors[Math.floor(Math.random() * 3)]
-});
-}
+} // 🌟 [CORRETTO]: Qui finisce il ciclo di creazione senza doppioni!
 
 // 🌬️ vento locale (repulsione)
 function wind(p) {
@@ -101,7 +85,6 @@ function wind(p) {
 
     p.vx += dx * 0.3 * force;
     p.vy += dy * 0.3 * force;
-    p.angle += (p.vx + p.vy) * 0.01;
   }
 
   // micro caos naturale
@@ -130,9 +113,19 @@ function draw() {
     p.x += p.vx;
     p.y += p.vy;
 
+    // Impostiamo il colore specifico della particella attuale
     ctx.fillStyle = p.color;
-    ctx.fillRect(p.x, p.y, spriteSize, spriteSize);
-    ctx.fillText(p.symbol, p.x, p.y);
+
+    if (p.symbol === "🍃") {
+      // Se vuoi dare sfumature diverse all'emoji, cambia lo 0deg (es: 90deg la fa diventare azzurra)
+      ctx.filter = "hue-rotate(0deg)"; 
+      ctx.fillText(p.symbol, p.x, p.y);
+      ctx.filter = "none"; // Resetta per non rovinare le stelle e i punti
+    } else {
+      // Disegna il quadratino piccolo di sfondo (solo per stelle e punti) e poi il testo
+      ctx.fillRect(p.x, p.y, spriteSize, spriteSize);
+      ctx.fillText(p.symbol, p.x, p.y);
+    }
   }
 
   requestAnimationFrame(draw);

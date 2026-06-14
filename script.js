@@ -30,8 +30,6 @@ let isFadingLeaves = false; // 🎭 Controlla se foglie e punti devono diventare
 let moon = { x: 0, y: 0, scale: 0, maxScale: 1 };
 
 function aggiornaPosizione(x, y) {
-  // Avendo impostato il canvas "fixed" nel CSS, le coordinate del tocco 
-  // sullo schermo corrispondono di nuovo esattamente a quelle del canvas!
   pointer.x = x / pixelScaleFactor;
   pointer.y = y / pixelScaleFactor; 
 }
@@ -54,12 +52,12 @@ function endTouch() {
   moon.x = pointer.x;
   moon.y = pointer.y;
 
-  // 1️⃣ Primo Timer: Aspetta 1 secondo per far emergere la luna
+  // 1️⃣ Primo Timer: Aspetta 5 secondi per far emergere la luna
   moonTimer = setTimeout(() => {
     if (!isTouching) { 
       deveEmergere = true;
       
-      // 2️⃣ Secondo Timer: Dopo che la luna è emersa, aspetta un altro secondo (1000ms) per far sparire foglie e punti
+      // 2️⃣ Secondo Timer: Dopo che la luna è emersa, aspetta un altro po' per far sparire foglie e punti
       leavesTimer = setTimeout(() => {
         if (!isTouching && deveEmergere) {
           isFadingLeaves = true;
@@ -109,9 +107,9 @@ for (let i = 0; i < N; i++) {
     vy: 0,
     baseX: x,
     baseY: y,
-    symbol: scelto,       
+    symbol: scelto,      
     color: coloreScelto,
-    opacity: 1.0 // 🌟 Ogni particella parte con opacità massima (100%)
+    opacity: 1.0 
   });
 }
 
@@ -177,20 +175,17 @@ function draw() {
 
     // 🌟 GESTIONE DELLE TRASPARENZE DINAMICHE
     if (isFadingLeaves) {
-      // Se dobbiamo nasconderle, riduciamo l'opacità di foglie e punti
       if (p.symbol === "🍃" || p.symbol === "·") {
-        if (p.opacity > 0) p.opacity -= 0.02; // Velocità di sparizione
+        if (p.opacity > 0) p.opacity -= 0.02; 
       }
     } else {
-      // Se l'utente tocca lo schermo, tutto ritorna visibile gradualmente (o all'istante se aumenti il valore)
       if (p.opacity < 1.0) p.opacity += 0.1; 
     }
 
-    // Se l'opacità è a 0, saltiamo il disegno per risparmiare calcoli
     if (p.opacity <= 0) continue;
 
     ctx.save();
-    // Applichiamo l'opacità corrente al disegno nel Canvas globalmente per questa particella
+    ctx.clearOpacity = p.opacity; // Per evitare conflitti usiamo globalAlpha
     ctx.globalAlpha = p.opacity;
     ctx.fillStyle = p.color;
 
@@ -207,3 +202,26 @@ function draw() {
 }
 
 draw();
+
+/* ==========================================================================
+   🧩 NUOVA FUNZIONE: CONTROLLO DELL'INDOVINELLO
+   ========================================================================== */
+function controllaIndovinello() {
+    // Legge cosa ha scritto l'utente, lo trasforma in minuscolo e toglie gli spazi vuoti
+    const rispostaUtente = document.getElementById("indovinello").value.toLowerCase().trim();
+    
+    const messaggioErrore = document.getElementById("error-message");
+    const boxSuccesso = document.getElementById("success-box");
+    const campoInput = document.getElementById("indovinello");
+
+    // 🎯 QUI DECIDI LA PAROLA CHIAVE (Accetta sia "villa spada" sia solo "spada")
+    if (rispostaUtente === "villa spada" || rispostaUtente === "spada") {
+        boxSuccesso.style.display = "block";    // Mostra il link di Maps
+        messaggioErrore.style.display = "none";  // Nasconde l'errore
+        campoInput.style.borderColor = "#4caf50"; // Input diventa verde
+    } else {
+        messaggioErrore.style.display = "block"; // Mostra l'errore
+        boxSuccesso.style.display = "none";      // Nasconde il successo se ri-sbaglia
+        campoInput.style.borderColor = "#ff4a4a"; // Input diventa rosso
+    }
+}

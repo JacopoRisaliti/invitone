@@ -67,19 +67,25 @@
             <strong>C'è soltanto un punto di aggregazione.</strong>
             <br><br>
             Se vi andrà di passare, mi farà piacere, SAPETE DOVE TROVARMI.
+            <br>
+            <br>
+            <br>
+            <br>
+            <span class="celebrate">   
+            ꧁꧂  
+            </span>
         </p>
+        
+        <br>
         <br>
         <br>
         <br>
 
         <div class="blocco-info">
+            <strong> INFO𓆤 </strong>
+            <br>
+            <br>
 
-            <strong> INFO   𓆤 </strong>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
             <h3>Ipotesi del luogo:</h3>            
             <ul>                
                 <li>Erba d'alberi</li>                
@@ -94,10 +100,9 @@
                 <li>Voglia di stare al sole</li>                
                 <li>Anche poco</li>                
                 <li>Anche tanto</li>                
-                <li>Anche per caso</li>                                                
+                <li>Anche per caso</li>                                                                
                 <li>Sbrilluccichi</li>            
             </ul>            
-            
             
             <h3>COSA PORTARE (per condividere):</h3>            
             <ul>                
@@ -110,7 +115,6 @@
                 <li>Qualunque cosa vi faccia stare bene</li>            
             </ul>            
             
-            
             <h3>COSA NON PORTARE (per buon senso):</h3>            
             <ul>                
                 <li>Plastiche monouso</li>                
@@ -120,7 +124,6 @@
                 <li>Petardi</li>            
             </ul>            
             
-            
             <h3>COSA RI-PORTARE (at home):</h3>            
             <ul>                
                 <li>Sudicio</li> 
@@ -129,17 +132,32 @@
             </ul>            
 
         </div> 
-        <br>            
-        <br>           
-
-
-        <br>            
-        <br>            
         
-        <h2 class="TLDNIPDA" style="text-align: center; font-size: 1.8rem; margin-top: 40px;">                
+        <br>            
+        <br>  
+        <br>            
+        <br>  
+
+        <h2 class="TLDNIPDA" style="text-align: center; font-size: 1.8rem; margin-top: 20px; margin-bottom: 30px;">                
             <i>Mi farà piacere vedervi </i>            
         </h2>            
-        
+        <br>  
+        <br>            
+        <br>
+
+        <div class="quest">
+            <p style="font-style: italic; margin-bottom: 15px;">Risolvi l'enigma degli amicə mortali per sbloccare le coordinate...</p>
+            <label for="indovinello" style="display:block; margin-bottom:10px; font-weight:bold;">Dove si nasconde la creatura elusiva?</label>
+            <input type="text" id="indovinello" placeholder="Scrivi qui la risposta..." autocomplete="off">
+            <button id="submit" onclick="controllaIndovinello()">Rivela Luogo</button>
+            
+            <div id="success-box" style="display: none; margin-top: 20px;">
+                <p style="color: #4caf50; font-weight: bold; margin-bottom: 15px;">✨ Risposta esatta! La mappa è stata sbloccata: ✨</p>
+                <a id="maps-link" href="https://maps.app.goo.gl/vostrolinkreale" target="_blank">🗺️ Apri Google Maps</a>
+            </div>
+            <p id="error-message" style="color: #ff4a4a; font-size: 16px; margin-top: 10px; display: none;">La natura non riconosce questa risposta. Riprova.</p>
+        </div>
+
         <h1 class="title">
             <span class="celebrate">                    
                 <br>
@@ -147,6 +165,9 @@
                 <br>
                 <br>
                 <br>
+            </span>
+        </h1>
+        
     </div>
 
     <script src="script.js"></script>
